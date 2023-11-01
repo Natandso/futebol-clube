@@ -3,9 +3,15 @@ const team = {
     teamName: 'Avaí/Kindermann'
 }
 
-const teams = [team];
+const teamWithoutId = {
+
+    teamName: 'Avaí/Kindermann'
+}
+
+const teams = [team, teamWithoutId];
 
 export {
     teams,
     team,
+    teamWithoutId,
 }

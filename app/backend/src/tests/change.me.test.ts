@@ -3,7 +3,7 @@ import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 
-import { teams, team } from './mocks/teams.mock';
+import { teams, team, teamWithoutId } from './mocks/teams.mock';
 import { app } from '../app';
 import Example from '../database/models/ExampleModel';
 
@@ -47,11 +47,11 @@ sinon.stub(SequelizeTeams, 'findAll').resolves(teams as any)
 const { status, body }= await chai.request(app).get('/teams');
 
 expect(status).to.eq(200);
-expect(body).to.deep.eq(team)
+expect(body).to.deep.eq(teams)
   });
 
   it('shoudl return a team by id', async function() {
-    sinon.stub(SequelizeTeams, 'findOne').resolves(teams as any)
+    sinon.stub(SequelizeTeams, 'findOne').resolves(teamWithoutId as any)
     
     const { status, body }= await chai.request(app).get('/teams/1');
     
@@ -62,10 +62,10 @@ expect(body).to.deep.eq(team)
       it('should return not found if the team doesn\'t exists', async function() {
         sinon.stub(SequelizeTeams, 'findOne').resolves(null);
     
-        const { status, body } = await chai.request(app).get('/teams/1');
+        const { status, body } = await chai.request(app).get('/teams/90');
     
         expect(status).to.equal(404);
-        expect(body.message).to.equal('team 1 not found');
+        expect(body.message).to.equal('Team 90 not found');
       });
   afterEach(sinon.restore);
 });
