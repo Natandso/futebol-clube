@@ -11,7 +11,7 @@ export default class AuthValidations {
 
     const [type, token] = authorization.split(' ');
     if (!type || !token) {
-      return res.status(401).json({ message: 'Token malformatted' });
+      return res.status(401).json({ message: 'Token must be a valid token' });
     }
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET || 'mySecret');

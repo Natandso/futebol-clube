@@ -29,4 +29,14 @@ export default class UsersService {
 
     return { status: 'UNAUTHORIZED', data: { message: 'Invalid email or password' } };
   }
+
+  public async findByEmail(email: string): Promise<ServiceResponse<IUser | ServiceMessage>> {
+    const user = await this.userModel.findByEmail(email);
+
+    if (user) {
+      return { status: 'SUCCESSFUL', data: user };
+    }
+
+    return { status: 'NOT_FOUND', data: { message: 'User not found' } };
+  }
 }
