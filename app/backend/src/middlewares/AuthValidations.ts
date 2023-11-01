@@ -2,7 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 
 export default class AuthValidations {
-  static validateLogin(req: Request, res: Response, next: NextFunction): Response | void {
+  static validateAuthorization(req: Request, res: Response, next: NextFunction): Response | void {
     const { authorization } = req.headers;
 
     if (!authorization) {
