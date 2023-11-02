@@ -6,7 +6,7 @@ import {
   CreationOptional,
 } from 'sequelize';
 import db from '.';
-import Teams from './TeamsModel';
+import SequelizeTeams from './TeamsModel';
 
 class SequelizeMatches extends Model<InferAttributes<SequelizeMatches>,
 InferCreationAttributes<SequelizeMatches>> {
@@ -27,22 +27,35 @@ SequelizeMatches.init({
   homeTeamId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'home_team_id',
+    references: {
+      model: 'teams',
+      key: 'id',
+    },
   },
   homeTeamGoals: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'home_team_goals',
   },
   awayTeamId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'away_team_id',
+    references: {
+      model: 'teams',
+      key: 'id',
+    },
   },
   awayTeamGoals: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'away_team_goals',
   },
   inProgress: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
     allowNull: false,
+    field: 'in_progress',
   },
 }, {
   sequelize: db,
@@ -51,9 +64,8 @@ SequelizeMatches.init({
   underscored: true,
 });
 
-Teams.hasMany(SequelizeMatches, { foreignKey: 'homeTeamId' });
-SequelizeMatches.belongsTo(Teams, { foreignKey: 'homeTeamId' });
+SequelizeMatches.belongsTo(SequelizeTeams, { foreignKey: 'home_team_id', as: 'homeTeam' });
 
-Teams.hasMany(SequelizeMatches, { foreignKey: 'awayTeamId' });
-SequelizeMatches.belongsTo(Teams, { foreignKey: 'awayTeamId' });
+SequelizeMatches.belongsTo(SequelizeTeams, { foreignKey: 'away_team_id', as: 'awayTeam' });
+
 export default SequelizeMatches;
