@@ -6,10 +6,10 @@ import SequelizeTeams from '../database/models/TeamsModel';
 export default class MatchesModel implements IMatchesModel {
   private model = SequelizeMatches;
 
-  async findAll(): Promise<IMatches[]> {
-    const dbData = await this.model.findAll({
-      attributes: ['id', 'homeTeamId', 'homeTeamGoals', 'awayTeamId',
-        'awayTeamGoals',
+  async findAll(inProgress?: boolean): Promise<IMatches[]> {
+    const dbDataMatches = await this.model.findAll({
+      where: inProgress !== undefined ? { inProgress } : undefined,
+      attributes: ['id', 'homeTeamId', 'homeTeamGoals', 'awayTeamId', 'awayTeamGoals',
         'inProgress'],
       include: [
         {
@@ -24,6 +24,6 @@ export default class MatchesModel implements IMatchesModel {
         },
       ],
     });
-    return dbData;
+    return dbDataMatches;
   }
 }

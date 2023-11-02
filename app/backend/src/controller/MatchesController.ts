@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import MatchesService from '../service/MatchesService';
-// import mapStatusHTTP from '../utils/mapStatusHTTP';
+import mapStatusHTTP from '../utils/mapStatusHTTP';
 
 export default class MatchesController {
   constructor(
@@ -8,7 +8,11 @@ export default class MatchesController {
   ) { }
 
   public async getAllMatches(req: Request, res: Response) {
-    const serviceResponse = await this.matchesService.getAllMatches();
-    return res.status(200).json(serviceResponse.data);
+    const
+      isItInProgress: boolean | undefined = req.query.inProgress
+        ? req.query.inProgress === 'true' : undefined;
+
+    const { status, data } = await this.matchesService.getAllMatches(isItInProgress);
+    return res.status(mapStatusHTTP(status)).json(data);
   }
 }
