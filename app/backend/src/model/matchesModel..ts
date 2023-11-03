@@ -38,4 +38,9 @@ export default class MatchesModel implements IMatchesModel {
       { where: { id } },
     );
   }
+
+  async creatingMatches(data: IMatches) {
+    const create = await this.model.create({ ...data, inProgress: true });
+    return create.dataValues;
+  }
 }

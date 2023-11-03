@@ -39,5 +39,5 @@ describe('Matches tests', () => {
     
         expect(status).to.eq(200);
         expect(body).to.deep.eq(matchesProgressTrue)
-          });             
+          });       
 })

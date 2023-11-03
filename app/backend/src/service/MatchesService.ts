@@ -28,4 +28,10 @@ export default class MatchesService {
 
     return { status: 'SUCCESSFUL', data: { message: 'Finished' } };
   }
+
+  public async creatingMatches(data: IMatches): Promise<ServiceResponse<IMatches>> {
+    const newMatch = await this.matchesModel.creatingMatches(data);
+
+    return { status: 'SUCCESSFUL', data: newMatch };
+  }
 }
