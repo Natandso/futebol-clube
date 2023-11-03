@@ -19,4 +19,11 @@ router.patch(
 
 );
 
+router.patch(
+  '/:id',
+  AuthValidations.validateAuthorization,
+  async (req: Request, res: Response) => matchesController.updateMatchesGoals(req, res),
+
+);
+
 export default router;
