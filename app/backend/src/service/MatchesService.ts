@@ -1,7 +1,7 @@
 import MatchesModel from '../model/matchesModel.';
 import IMatches from '../Interfaces/matches/IMatches';
 import { IMatchesModel } from '../Interfaces/matches/IMatchesModel';
-import { ServiceResponse } from '../Interfaces/ServiceResponse';
+import { ServiceResponse, ServiceMessage } from '../Interfaces/ServiceResponse';
 
 export default class MatchesService {
   constructor(
@@ -13,5 +13,11 @@ export default class MatchesService {
     const allMatches = await this.matchesModel.findAll(inProgress);
 
     return { status: 'SUCCESSFUL', data: allMatches };
+  }
+
+  public async patchMatches(id: IMatches['id']): Promise<ServiceResponse<ServiceMessage>> {
+    await this.matchesModel.patchMatches(id);
+
+    return { status: 'SUCCESSFUL', data: { message: 'Finished' } };
   }
 }
