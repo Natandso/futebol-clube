@@ -3,6 +3,9 @@
 
 Último projeto de Back-End fornecido para prática de todas as tecnologias até então estudadas no momento pela instituição Trybe. Neste projeto criamos uma api com tudo que aprendemos em back-end!
 
+## Diagrama Entidade Relacionamento do projeto
+![diagrama do futebol-clube](image.png)
+
 
 ## Aprendizados
 
@@ -26,7 +29,7 @@ Instalação com NPM
     
 ## Autores
 
-- [@NatanDso](https://github.com/Natandso)
+- [@Natan Santana (Aero)](https://github.com/Natandso)
 
 
 ## Licença e Autoria
